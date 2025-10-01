@@ -29,6 +29,22 @@ class UTip extends StatefulWidget {
 }
 
 class _UTipState extends State<UTip> {
+  int _personCounter = 1;
+  //methods
+  void increment(){
+    setState(() {
+      _personCounter = _personCounter + 1;
+    });
+  }
+
+
+  void decrement(){
+    setState(() {
+      if(_personCounter > 0){
+        _personCounter = _personCounter - 1;
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -66,7 +82,59 @@ class _UTipState extends State<UTip> {
                 ],
               ),
             ),
-          )
+          ),
+
+          // form
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                  border: Border.all(
+                    color: theme.colorScheme.primary,
+                    width: 2
+                  ),
+                ),
+                child:  Column(
+                  children: [
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      onChanged:(String value) {
+                        print("Value entered: $value");
+                      } ,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Bill Amount',
+                        prefixIcon: Icon(Icons.attach_money),
+                        
+                      ),
+                    ),
+                    //split bill area
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                      children: [
+                      Text('Split' , style: theme.textTheme.titleMedium,),
+                      Row(
+                        children: [
+                          IconButton(
+                            color: theme.colorScheme.primary,
+                            onPressed: decrement
+                          , icon: const Icon(Icons.remove)),
+                          Text("$_personCounter" , style:theme.textTheme.titleMedium ,),
+                          IconButton(
+                            color: theme.colorScheme.primary,
+                            onPressed: increment, icon: const Icon(Icons.add))
+                        ],
+                      )
+
+
+                    ],)
+                  ],
+                ),
+              ),
+          ),
+          
         ],
       ),
     );
