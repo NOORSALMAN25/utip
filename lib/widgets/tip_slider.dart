@@ -14,6 +14,7 @@ class TipSlider extends StatelessWidget {
     return Slider(
       value: _tipPercentage,
       onChanged: onChanged,
+    
     min:0,
     max:0.5 ,
     divisions: 5,
