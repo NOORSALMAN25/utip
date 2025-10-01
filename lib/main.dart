@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utip/widgets/bill_amount.dart';
 import 'package:utip/widgets/person_counter.dart';
 import 'package:utip/widgets/tip_slider.dart';
 
@@ -92,7 +93,7 @@ class _UTipState extends State<UTip> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                   border: Border.all(
@@ -102,17 +103,12 @@ class _UTipState extends State<UTip> {
                 ),
                 child:  Column(
                   children: [
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      onChanged:(String value) {
-                        print("Value entered: $value");
-                      } ,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Bill Amount',
-                        prefixIcon: Icon(Icons.attach_money),
+                    BillAmountField(
+                      billAmount: '100',
+                      onChanged: (value){
                         
-                      ),
+                        print('amount entered: $value');
+                      },
                     ),
                     //split bill area
                     PersonCounter(theme: theme, personCounter: _personCounter, onDecrement: decrement, onIncrement:increment,),
@@ -147,5 +143,4 @@ class _UTipState extends State<UTip> {
     );
   }
 }
-
 
